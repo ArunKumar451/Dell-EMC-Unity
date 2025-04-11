@@ -1,0 +1,49 @@
+- hosts: unity
+  vars:
+    user: "admin"
+    password: "Password1234#"
+  tasks:
+    - name: Authenticate & retrieve cookie
+      uri:
+        url: https://{{ inventory_hostname }}/api/types/loginSessionInfo/instances?language=en-US&fields=id
+        method: GET
+        headers:
+          "x-emc-rest-client": "TRUE"
+        user: "{{ user }}"
+        password: "{{ password }}"
+        force_basic_auth: yes
+        validate_certs: no
+      register: result
+
+    - name: Debug authentication result
+      debug:
+        msg: "{{ result }}"
+
+    - name: Create LUN
+      uri:
+        url: https://{{ inventory_hostname }}/api/types/storageResource/action/createLun
+        method: POST
+        user: "{{ user }}"
+        password: "{{ password }}"
+        force_basic_auth: yes
+        validate_certs: no
+        body: "{{ lookup('file', 'lundetails.txt', convert_data=False) }}"
+        body_format: json
+        http_agent: Ansible
+        remote_src: no
+        follow_redirects: yes
+        return_content: yes
+        force: yes
+        status_code: [200, 422]
+        headers:
+          cookie: "{{ result.cookies | dictsort(false) | map('join', '=') | join('; ') }}"
+          Content-type: application/json
+          Accept: application/json
+          EMC-CSRF-TOKEN: "{{ result.emc_csrf_token }}"
+          X-EMC-REST-CLIENT: true
+      register: lun_create_result
+
+    - name: DEBUG | LUN create result -  INFO
+      debug:
+        msg: "{{ lun_create_result }}"
+

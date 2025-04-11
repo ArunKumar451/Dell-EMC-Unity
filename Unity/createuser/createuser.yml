@@ -1,0 +1,11 @@
+---
+- hosts: unity
+  gather_facts: false
+  vars:
+    ansible_facts:
+      enabled: false  # Disables even minimal interpreter discovery
+    ansible_interpreter_auto: silent 
+  roles:
+   - auth
+   - createuser
+   - logout

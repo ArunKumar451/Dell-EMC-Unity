@@ -1,0 +1,26 @@
+---
+# tasks file for Modify user
+    - name: Authenticate Using Cookies & modify user
+      uri:
+        url: https://{{inventory_hostname}}/api/instances/user/name:{{username}}/action/modify
+        method: POST
+        body: "{{ lookup('file','role.txt', convert_data=False)}}"
+        body_format: json
+        http_agent: Ansible
+        remote_src: no
+        follow_redirects: yes
+        validate_certs: no
+        return_content: yes
+        force: yes
+        status_code: 204,202
+        headers:
+          cookie: "{{ result.cookies|dictsort(false)|map('join', '=')|join('; ') }}"
+          Content-type: application/json
+          Accept: application/json
+          EMC-CSRF-TOKEN: "{{ result.emc_csrf_token }}"
+          X-EMC-REST-CLIENT: true
+      register: modify_user
+    - name: DEBUG / GOT modify_user  INFO
+      debug:
+          msg: "{{modify_user }}"
+

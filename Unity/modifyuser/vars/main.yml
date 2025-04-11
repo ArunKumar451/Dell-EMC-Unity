@@ -1,0 +1,3 @@
+---
+# vars file for modifyuser
+username: "{{ lookup('file','moduser.txt')|trim }}"
