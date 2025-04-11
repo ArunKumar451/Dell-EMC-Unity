@@ -1,0 +1,58 @@
+- hosts: unity
+  vars:
+    user: "admin"
+    password: "Password1234#"
+  tasks:
+    - name: Authenticate & retrieve cookie
+      uri:
+        method: GET
+        headers:
+          "x-emc-rest-client": "TRUE"
+        user: "{{ user }}"
+        password: "{{ password }}"
+        force_basic_auth: yes
+        validate_certs: no
+        url: https://{{inventory_hostname}}/api/types/pool/instances?compact=true&fields=id%2Cname
+      register: result
+
+    - name: DEBUG / GOT Login INFO
+      debug:
+        msg: "{{ result }}"
+
+    - name: Set Pool ID fact
+      set_fact:
+        pool_id: "{{ result.json.entries[0].content.id }}"
+
+    - name: Print Pool ID
+      debug:
+        msg: "{{ pool_id }}"
+
+    - name: Print Pool ID
+      debug:
+        msg: "{{ pool_id }}"
+
+    - name: Get Lun ID
+      uri:
+        method: GET
+        headers:
+          "x-emc-rest-client": "TRUE"
+        user: "{{ user }}"
+        password: "{{ password }}"
+        force_basic_auth: yes
+        validate_certs: no
+        url: https://{{inventory_hostname}}/api/types/lun/instances?compact=true&fields=id%2Cname
+      register: lun_id
+
+    - name: DEBUG / GOT Login INFO
+      debug:
+        msg: "{{ lun_id }}"
+
+    - name: Lun ID's are
+      debug:
+        msg: "{{ lun_id }}"
+
+    - name: Dynamically update the pool ID in lundetails.txt file
+      template:
+        src: ./lundetails.txt
+        dest: ./lundetails.txt
+   
