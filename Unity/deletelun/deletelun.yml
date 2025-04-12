@@ -2,7 +2,7 @@
   vars:
     user: "admin"
     password: "Password1234#"
-    username: "{{ lookup('file','lundetails.txt')|trim }}"
+    lun_name: "{{ lookup('file','lundetails.txt')|trim }}"
   tasks:
     - name: Authenticate & retrieve cookie
       uri:
@@ -21,7 +21,7 @@
         follow_redirects: yes
         status_code: 204
         method: DELETE
-        url: https://{{inventory_hostname}}/api/instances/storageResource/name:{{username}}
+        url: https://{{inventory_hostname}}/api/instances/storageResource/name:{{lun_name}}
         headers:
           cookie: "{{ result.cookies|dictsort|map('join', '=')|join('; ') }}"
           "Content-Type": "application/json"
