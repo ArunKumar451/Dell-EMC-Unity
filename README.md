@@ -15,7 +15,7 @@ Each folder contains a task file `.yml` to run a specific job. The other files h
 
 Within the directory run the .yml task file.
 
-#Synatax
+## Synatax
  ansible-playbook -i <Inventory_Path> <.yml Path>
 
 ## Example
