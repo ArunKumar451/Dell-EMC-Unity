@@ -1,1 +1,0 @@
-{ "name": "ansible2", "role": "operator", "password":"Password456!" }

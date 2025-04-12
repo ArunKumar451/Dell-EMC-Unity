@@ -1,7 +1,0 @@
----
-- hosts: unity
-  gather_facts: no
-  roles:
-   - auth
-   - deleteuser
-   - logout
