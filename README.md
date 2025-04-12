@@ -11,10 +11,11 @@ Automate the management of Dell EMC Unity storage systems using Ansible playbook
 - Ansible
 
 ## Usage
-Each folder contains a task file `.yml` to run a specific job. The other files hold the variables or Jinja format variable templates to be used. The variables are updated with the parameters to be updated.
+Each folder contains a task file `.yml` to run a specific job. The other files hold the variables or are a Jinja format variable templates to be used. The variables are updated with the values required by the tasks that are run.
 
 Within the directory run the .yml task file.
 
+#Synatax
  ansible-playbook -i <Inventory_Path> <.yml Path>
 
 ## Example
