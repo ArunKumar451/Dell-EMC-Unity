@@ -1,4 +1,4 @@
-# Dell EMC Unity
+## Dell EMC Unity
 
 ## Description
 Automate the management of Dell EMC Unity storage systems using Ansible playbooks.
@@ -15,10 +15,10 @@ Each folder contains a task file `.yml` to run a specific job. The other files h
 
 Within the directory run the .yml task file.
 
-ansible-playbook -i <Inventory_Path> <.yml Path>
+ ansible-playbook -i <Inventory_Path> <.yml Path>
 
 ## Example
-root@ubuntuserver1:/root/git/Dell-EMC-Unity/Unity/Create-User$ ansible-playbook -i inventory createuser.yml
+root@server:/root/git/Dell-EMC-Unity/Unity/Create-User$ ansible-playbook -i inventory createuser.yml
 
 PLAY [unity] ********************************************************************************************************************************************************************************
 TASK [../Auth : Authenticate & retrieve cookie] *********************************************************************************************************************************************
@@ -89,7 +89,7 @@ ok: [192.168.1.1] => {
 PLAY RECAP **********************************************************************************************************************************************************************************
 192.168.1.1             : ok=6    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
-root@ubuntuserver1:/root/git/Dell-EMC-Unity/Unity/Create-User$
+root@server:/root/git/Dell-EMC-Unity/Unity/Create-User$
 
 
 ## Contributing
