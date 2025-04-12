@@ -1,0 +1,3 @@
+---
+# vars file for deleteuser
+username: "{{ lookup('file','deluser.txt')|trim }}"

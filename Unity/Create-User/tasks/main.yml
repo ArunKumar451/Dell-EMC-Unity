@@ -1,0 +1,26 @@
+---
+# tasks file for createuser
+    - name: Authenticate Using Cookies & create user
+      uri:
+        url: https://{{inventory_hostname}}/api/types/user/instances
+        method: POST
+        body: "{{ lookup('file','user.txt', convert_data=False)}}"
+        body_format: json
+        http_agent: Ansible
+        remote_src: no
+        follow_redirects: yes
+        validate_certs: no
+        return_content: yes
+        force: yes
+        status_code: 201,422
+        headers:
+          cookie: "{{ result.cookies|dictsort(false)|map('join', '=')|join('; ') }}"
+          Content-type: application/json
+          Accept: application/json
+          EMC-CSRF-TOKEN: "{{ result.emc_csrf_token }}"
+          X-EMC-REST-CLIENT: true
+      register: create_user
+    - name: DEBUG / GOT create_user  INFO
+      debug:
+          msg: "{{create_user }}"
+

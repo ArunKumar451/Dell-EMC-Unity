@@ -1,0 +1,37 @@
+- hosts: unity
+  vars:
+    user: "admin"
+    password: "Password1234#"
+    lun_name: "{{ lookup('file','lundetails.txt')|trim }}"
+  tasks:
+    - name: Authenticate & retrieve cookie
+      uri:
+        url: https://{{ inventory_hostname }}/api/types/loginSessionInfo/instances?language=en-US&fields=id
+        method: GET
+        headers:
+          "x-emc-rest-client": "TRUE"
+        user: "{{ user }}"
+        password: "{{ password }}"
+        force_basic_auth: yes
+        validate_certs: no
+      register: result
+
+    - name: DELETE LUN
+      uri:
+        follow_redirects: yes
+        status_code: 204
+        method: DELETE
+        url: https://{{inventory_hostname}}/api/instances/storageResource/name:{{lun_name}}
+        headers:
+          cookie: "{{ result.cookies|dictsort|map('join', '=')|join('; ') }}"
+          "Content-Type": "application/json"
+          "Accept": "application/json"
+          "emc-csrf-token": "{{ result.emc_csrf_token }}"
+          X-EMC-REST-CLIENT: true
+          body_format: json
+        validate_certs: no
+        return_content: yes
+      register: delete_lun
+    - name: DEBUG / DELETE LUN INFO
+      debug:
+          msg: "{{ delete_lun }}"
