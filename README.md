@@ -15,7 +15,7 @@ Each folder contains a task file `.yml` to run a specific job. The other files h
 
 Within the directory run the .yml task file.
 
-ansible-playbook -i <Inventory Path> <Path to the .yml task file>
+ansible-playbook -i <Inventory_Path> <.yml Path>
 
 ## Example
 root@ubuntuserver1:/root/git/Dell-EMC-Unity/Unity/Create-User$ ansible-playbook -i inventory createuser.yml
