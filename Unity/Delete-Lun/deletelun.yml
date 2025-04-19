@@ -2,7 +2,6 @@
   vars:
     user: "admin"
     password: "Password1234#"
-    lun_name: "{{ lookup('file','lundetails.txt')|trim }}"
   tasks:
     - name: Authenticate & retrieve cookie
       uri:
