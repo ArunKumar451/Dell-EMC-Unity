@@ -71,7 +71,7 @@
         password: "{{ password }}"
         force_basic_auth: yes
         validate_certs: no
-        body: "{{ lookup('template', 'interface_template.conf') | from_json }}"
+        body: body: {{ lookup('template', 'interface_template.conf') | from_json }}
         body_format: json
         http_agent: Ansible
         remote_src: no
