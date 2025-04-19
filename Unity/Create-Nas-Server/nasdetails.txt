@@ -1,7 +1,7 @@
 {
   "name": "{{nas_name}}",
   "homeSP": {
-    "id": "{{sp}}"
+    "id": "{{sp_id}}"
   },
   "pool": {
     "id": "pool_1"
