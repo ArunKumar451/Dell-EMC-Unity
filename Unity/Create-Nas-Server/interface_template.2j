@@ -9,7 +9,7 @@
   "ipAddress": "{{ip}}",
   "netmask": "{{netmask}}",
   "gateway": "{{gateway}}",
-  "vlanId": {valan_id}},
+  "vlanId": {{valan_id}},
   "isPreferred": true,
   "role": 0
 }
