@@ -15,7 +15,17 @@
         force_basic_auth: yes
         validate_certs: no
       register: result
-
+   
+    - name: 
+      template:
+        src: ./nasdetails.2j
+        dest: ./nasdetails.conf
+		
+    - name: 
+      template:
+        src: ./interface_template.2j
+        dest: ./interface_template.conf	
+   
     - name: Create NAS
       uri:
         url: https://{{ inventory_hostname }}/api/types/nasServer/instances
