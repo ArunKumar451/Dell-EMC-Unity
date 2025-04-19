@@ -27,7 +27,7 @@
         password: "{{ password }}"
         force_basic_auth: yes
         validate_certs: no
-        body: "{{ lookup('file', 'lundetails.txt', convert_data=False) }}"
+        body: "{{ lookup('file', 'lun_template.j2', convert_data=False) }}"
         body_format: json
         http_agent: Ansible
         remote_src: no
