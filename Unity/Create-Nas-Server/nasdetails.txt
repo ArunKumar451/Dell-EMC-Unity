@@ -1,7 +1,7 @@
 {
-  "name": "AWX-Test-NAS",
+  "name": "{{nas_name",
   "homeSP": {
-    "id": "spa"
+    "id": "{{sp}}"
   },
   "pool": {
     "id": "pool_1"
