@@ -3,6 +3,7 @@
     user: "admin"
     password: "Password1234#"
     nas_id: ""
+    nas_name: "MyNAS"  # Example variable for nas_name
   tasks:
     - name: Authenticate & retrieve cookie
       uri:
@@ -15,12 +16,16 @@
         force_basic_auth: yes
         validate_certs: no
       register: result
-   
-    - name: 
+
+    - name: Render NAS details template
       template:
         src: ./nasdetails.2j
         dest: ./nasdetails.conf
-   
+
+    - name: Debug rendered NAS details
+      debug:
+        msg: "{{ lookup('file', 'nasdetails.conf', convert_data=False) }}"
+
     - name: Create NAS
       uri:
         url: https://{{ inventory_hostname }}/api/types/nasServer/instances
@@ -45,9 +50,9 @@
           X-EMC-REST-CLIENT: true
       register: nas_create_result
 
-    - name: Debug NAS ID
+    - name: Debug NAS creation result
       debug:
-        msg: "{{nas_create_result}}"
+        msg: "{{ nas_create_result }}"
 
     - name: GET NAS ID
       set_fact:
@@ -55,14 +60,18 @@
 
     - name: Debug NAS ID
       debug:
-        msg: "{{nas_id}}"
-        
-    - name: UPDATE NAS-ID KEY IN INTERFACE FILE
+        msg: "{{ nas_id }}"
+
+    - name: Render interface template
       template:
         src: ./interface_template.2j
         dest: ./interface_template.conf
 
-    - name: ASSIGNING IP & INTERFACE -> NAS server
+    - name: Debug rendered interface template
+      debug:
+        msg: "{{ lookup('file', 'interface_template.conf', convert_data=False) }}"
+
+    - name: Assign IP & interface to NAS server
       uri:
         url: https://{{ inventory_hostname }}/api/types/fileInterface/instances
         method: POST
@@ -87,7 +96,6 @@
         timeout: 60
       register: nas_interface_result
 
-    - name:
+    - name: Debug NAS interface result
       debug:
-        msg: "{{nas_interface_result}}"
-
+        msg: "{{ nas_interface_result }}"
