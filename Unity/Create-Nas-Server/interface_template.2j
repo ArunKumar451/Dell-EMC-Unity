@@ -10,6 +10,8 @@
   "netmask": "{{netmask}}",
   "gateway": "{{gateway}}",
   "vlanId": "{{vlan_id}}",
-  "isPreferred": true
+  "isPreferred": true,
+   "role": 0
+
 }
   
