@@ -3,7 +3,7 @@
     user: "admin"
     password: "Password1234#"
     nas_id: ""
-  # Example variable for nas_name
+
   tasks:
     - name: Authenticate & retrieve cookie
       uri:
@@ -17,14 +17,10 @@
         validate_certs: no
       register: result
 
-    - name: Render NAS details template
+    - name: Update NAS details in template
       template:
         src: ./nasdetails.2j
         dest: ./nasdetails.conf
-
-    - name: Debug rendered NAS details
-      debug:
-        msg: "{{ lookup('file', 'nasdetails.conf', convert_data=False) }}"
 
     - name: Create NAS
       uri:
@@ -62,14 +58,10 @@
       debug:
         msg: "{{ nas_id }}"
 
-    - name: Render interface template
+    - name: Update interface template details
       template:
         src: ./interface_template.2j
         dest: ./interface_template.conf
-
-    - name: Debug rendered interface template
-      debug:
-        msg: "{{ lookup('file', 'interface_template.conf', convert_data=False) }}"
 
     - name: Assign IP & interface to NAS server
       uri:
