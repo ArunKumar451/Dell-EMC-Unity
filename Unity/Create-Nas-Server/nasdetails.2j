@@ -1,5 +1,5 @@
 {
-  "name": "nas_name",
+  "name": "{{nas_name}}",
   "homeSP": {
     "id": "spa"
   },
