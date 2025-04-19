@@ -20,7 +20,7 @@
       template:
         src: ./nasdetails.2j
         dest: ./nasdetails.conf
-		
+
     - name: 
       template:
         src: ./interface_template.2j
