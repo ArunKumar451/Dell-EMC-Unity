@@ -63,6 +63,10 @@
         src: ./interface_template.2j
         dest: ./interface_template.conf
 
+    - name: Load rendered interface template as JSON
+      set_fact:
+        interface_payload: "{{ lookup('template', 'interface_template.conf') | from_json }}"
+
     - name: Assign IP & interface to NAS server
       uri:
         url: https://{{ inventory_hostname }}/api/types/fileInterface/instances
@@ -71,7 +75,7 @@
         password: "{{ password }}"
         force_basic_auth: yes
         validate_certs: no
-        body: "{{ lookup('template', 'interface_template.conf') | from_json }}"
+        body: "{{ interface_payload }}"
         body_format: json
         http_agent: Ansible
         remote_src: no
