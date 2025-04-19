@@ -1,14 +1,14 @@
 
 {
   "nasServer": {
-    "id": "{{ nas_id }}"
+    "id": "{{nas_id}}"
   },
   "ipPort": {
     "id": "spa_eth2"
   },
-  "ipAddress": "{{ ip }}",
-  "netmask": "{{ netmask }}",
-  "gateway": "{{ gateway }}",
-  "vlanId": "{{ vlan_id }}",
+  "ipAddress": "{{ip}}",
+  "netmask": "{{netmask}}",
+  "gateway": "{{gateway}}",
+  "vlanId": "{{vlan_id}}",
   "isPreferred": true,
   
