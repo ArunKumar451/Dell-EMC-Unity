@@ -1,0 +1,17 @@
+{
+  "name": "{{lun_name}}",
+  "description": "This is automation created LUN",
+  "replicationParameters": {
+    "isReplicationDestination": "true"
+  },
+  "lunParameters": {
+    "pool": {
+      "id": "{{pool_id}}"
+    },
+    "isThinEnabled": "true",
+    "isDataReductionEnabled": "false" ,
+    "isAdvancedDedupEnabled": "false" ,
+    "size": 1073741824,
+    "defaultNode": 0,
+  }
+}
