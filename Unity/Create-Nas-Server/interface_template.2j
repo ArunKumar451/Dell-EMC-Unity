@@ -1,4 +1,3 @@
-
 {
   "nasServer": {
     "id": "{{nas_id}}"
@@ -12,6 +11,5 @@
   "vlanId": "{{vlan_id}}",
   "isPreferred": true,
    "role": 0
-
 }
   
