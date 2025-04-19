@@ -3,7 +3,7 @@
     user: "admin"
     password: "Password1234#"
     nas_id: ""
-    nas_name: "MyNAS"  # Example variable for nas_name
+  # Example variable for nas_name
   tasks:
     - name: Authenticate & retrieve cookie
       uri:
