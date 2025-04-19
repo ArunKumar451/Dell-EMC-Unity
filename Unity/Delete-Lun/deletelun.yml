@@ -20,7 +20,7 @@
         follow_redirects: yes
         status_code: 204
         method: DELETE
-        url: https://{{inventory_hostname}}/api/instances/storageResource/name:{{lun_name}}
+        url: "https://{{ inventory_hostname }}/api/instances/storageResource/name:{{ lun_name | urlencode }}"
         headers:
           cookie: "{{ result.cookies|dictsort|map('join', '=')|join('; ') }}"
           "Content-Type": "application/json"
