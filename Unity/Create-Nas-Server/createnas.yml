@@ -48,6 +48,10 @@
       set_fact:
         nas_id: "{{ nas_create_result.json.content.id }}"
 
+    - name: Debug NAS ID
+      debug:
+        msg: "{{nas_id}}"
+        
     - name: UPDATE NAS-ID KEY IN INTERFACE FILE
       template:
         src: ./interface_template.txt
