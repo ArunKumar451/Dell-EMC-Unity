@@ -64,8 +64,8 @@
         
     - name: UPDATE NAS-ID KEY IN INTERFACE FILE
       template:
-        src: ./interface_template.txt
-        dest: ./interface.txt
+        src: ././interface_template.2j
+        dest: ././interface_template.conf
 
     - name: ASSIGNING IP & INTERFACE -> NAS server
       uri:
